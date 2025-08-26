@@ -1,3 +1,11 @@
+# generate_portfolio.py
+# Creates a complete, personalized cybersecurity portfolio (HTML/CSS/JS + projects.json)
+# prefilled with Carlos Alvarado's background. Produces ./portfolio_site.zip.
+# Run: python generate_portfolio.py
+
+import os, json, zipfile
+from textwrap import dedent
+
 NAME = "Carlos Alvarado"
 ROLE = "IT Engineer · Cybersecurity Student"
 LOCATION = "San Antonio, TX"
