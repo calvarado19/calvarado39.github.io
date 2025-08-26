@@ -1,0 +1,481 @@
+NAME = "Carlos Alvarado"
+ROLE = "IT Engineer · Cybersecurity Student"
+LOCATION = "San Antonio, TX"
+LINKEDIN_URL = "https://www.linkedin.com/in/carlos-alvarado-370b39275/"
+CONTACT_EMAIL = "20car06@gmail.com"
+SITE_URL = "https://calvarado39.github.io/"
+
+# ====== File contents ======
+
+INDEX_HTML = lambda: dedent(f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{NAME} · Cybersecurity Portfolio</title>
+  <meta name="description" content="Cybersecurity portfolio showcasing blue team labs, networking work, and automation projects by {NAME} in {LOCATION}." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <meta property="og:title" content="{NAME} · Cybersecurity Portfolio" />
+  <meta property="og:description" content="Blue team labs, networking projects, and automation scripts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{SITE_URL}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <script type="application/ld+json">
+  {{
+    "@context":"https://schema.org",
+    "@type":"Person",
+    "name":"{NAME}",
+    "jobTitle":"{ROLE}",
+    "address":"{LOCATION}",
+    "url":"{SITE_URL}",
+    "sameAs":["{LINKEDIN_URL}","{GITHUB_URL}"]
+  }}
+  </script>
+</head>
+<body>
+  <header class="site-header container">
+    <a class="logo" href="#">{NAME.split()[0][:1]}{NAME.split()[-1][:1]}</a>
+    <nav class="nav">
+      <a href="#projects">Projects</a>
+      <a href="#notes">Notes</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="btn btn-small">Contact</a>
+    </nav>
+    <button class="theme-toggle" aria-label="Toggle dark mode" title="Toggle theme">🌓</button>
+  </header>
+
+  <section class="hero container reveal">
+    <div class="hero-text">
+      <h1>{ROLE}</h1>
+      <p>Hi, I’m <strong>{NAME}</strong> — an IT engineer in {LOCATION} transitioning into cybersecurity. I work on MikroTik/UniFi networks, Windows servers, NAS, fiber runs, and blue-team labs. I’m building toward SOC Analyst / Security Engineer roles.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn">Explore Projects</a>
+        <a href="{LINKEDIN_URL}" class="btn btn-ghost" target="_blank" rel="noreferrer">LinkedIn</a>
+      </div>
+      <ul class="badges">
+        <li>Blue Team</li><li>DFIR</li><li>Networking</li><li>Automation</li>
+      </ul>
+    </div>
+    <div class="hero-card">
+      <div class="stat"><span class="stat-number" id="projCount">—</span><span class="stat-label">Projects</span></div>
+      <div class="stat"><span class="stat-number">5</span><span class="stat-label">Write-ups</span></div>
+      <div class="stat"><span class="stat-number">3+</span><span class="stat-label">Certs/Prep</span></div>
+    </div>
+  </section>
+
+  <section id="projects" class="section container">
+    <div class="section-head">
+      <h2>Projects</h2>
+      <p class="muted">Filter by focus area.</p>
+      <div class="filters">
+        <button class="chip is-active" data-filter="all">All</button>
+        <button class="chip" data-filter="Blue Team">Blue Team</button>
+        <button class="chip" data-filter="Networking">Networking</button>
+        <button class="chip" data-filter="Automation">Automation</button>
+        <button class="chip" data-filter="Forensics">Forensics</button>
+        <button class="chip" data-filter="Docs">Docs</button>
+      </div>
+    </div>
+
+    <div id="projectGrid" class="grid reveal"></div>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal-card" role="document">
+        <button class="modal-close" aria-label="Close" data-close>✕</button>
+        <h3 id="modalTitle"></h3>
+        <p id="modalDesc" class="muted"></p>
+        <ul id="modalMeta" class="meta"></ul>
+        <div id="modalLinks" class="card-actions"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes" class="section container reveal">
+    <div class="section-head">
+      <h2>Notes</h2>
+      <p class="muted">Short write-ups that show my process.</p>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-content">
+        <h4>Windows VPN: Split Tunneling Checklist</h4><p class="muted">Adapter metrics, DNS, and “Use default gateway on remote network.”</p></div></div>
+      <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-content">
+        <h4>MikroTik Static IP via WinBox</h4><p class="muted">Quick steps for setting a static on WAN and verifying link lights.</p></div></div>
+      <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-content">
+        <h4>TrueNAS SCALE: When to VM vs Bare Metal</h4><p class="muted">Pros/cons for homelab media and NAS services.</p></div></div>
+      <div class="timeline-item"><span class="timeline-dot"></span><div class="timeline-content">
+        <h4>Security+ 701 Study Notes</h4><p class="muted">Threats/attacks, secure architecture, and identity basics.</p></div></div>
+    </div>
+  </section>
+
+  <section id="about" class="section container reveal">
+    <div class="section-head">
+      <h2>About</h2>
+      <p class="muted">{NAME} — IT Engineer at Visual Net Design (VND). Hands-on with River Center Mall (RCM), Sea Life & LEGOLAND, Act Fast Delivery (AFD), apartments/medical offices, etc. Experience includes fiber termination (SC, multimode), patch panels, MikroTik/UniFi config, VLANs, PoE switching, UPS installs, camera systems (Verkada/Reolink/Hikvision), Windows imaging/SSD migrations, and monthly maintenance. Studying at NLC/PAC; prepping Security+ (SY0-701), long-term CISSP/CCSP.</p>
+    </div>
+    <ul class="list">
+      <li>🧰 Tools: Nmap, Wireshark, Zeek, Autopsy, Burp, Metasploit</li>
+      <li>🛡 Interests: Blue team, DFIR, GRC</li>
+      <li>📚 Courses: Business & Professional Communication, Routers, IT Security, Forensics, Python</li>
+      <li>🏷️ Goals: SOC Analyst → Security Engineer</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="section container reveal">
+    <div class="section-head">
+      <h2>Contact</h2>
+      <p class="muted">Open to internships and project collaborations.</p>
+    </div>
+    <div class="contact">
+      <a class="btn" href="mailto:{CONTACT_EMAIL}">Email Me</a>
+      <a class="btn btn-ghost" href="{GITHUB_URL}" target="_blank" rel="noreferrer">GitHub</a>
+      <a class="btn btn-ghost" href="{LINKEDIN_URL}" target="_blank" rel="noreferrer">LinkedIn</a>
+      <button id="copyEmail" class="btn btn-ghost" type="button">Copy Email</button>
+      <a class="btn btn-ghost" href="resume.pdf" target="_blank" rel="noreferrer">Resume (PDF)</a>
+    </div>
+  </section>
+
+  <footer class="site-footer container">
+    <p>© <span id="year"></span> {NAME} · Last updated <span id="updated"></span></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+""").strip()
+
+STYLE_CSS = dedent("""
+:root{
+  --bg:#0b1017;--text:#e6edf7;--muted:#9aa6bd;
+  --primary:#7cc7ff;--accent:#9effa1;--card:#0f1522;--border:#263044;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial,sans-serif;background:var(--bg);color:var(--text)}
+a{color:var(--primary);text-decoration:none}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}
+.btn{display:inline-block;padding:12px 16px;border:1px solid var(--border);border-radius:12px;background:var(--primary);color:#001226;font-weight:700;transition:transform .05s ease, box-shadow .2s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text)}
+.btn-small{padding:8px 12px;font-size:.9rem}
+
+.muted{color:var(--muted)}
+.section{padding:40px 0 8px}
+.section-head h2{margin:.2rem 0}
+.section-head p{margin:.2rem 0 1rem}
+
+.site-header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{font-weight:800;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:1.25rem}
+.nav a{margin:0 8px;color:var(--muted)}
+.theme-toggle{background:transparent;border:1px solid var(--border);color:var(--muted);border-radius:10px;padding:8px 10px;cursor:pointer}
+
+.hero{display:grid;grid-template-columns:1.3fr .7fr;gap:28px;padding:40px 0 10px}
+.hero-text h1{font-size:2.1rem;margin:.2rem 0 .6rem}
+.hero-text p{color:var(--muted);line-height:1.6}
+.hero-actions{display:flex;gap:10px;margin:14px 0 10px}
+.badges{display:flex;flex-wrap:wrap;gap:10px;padding:0;margin:6px 0 0;list-style:none}
+.badges li{border:1px dashed var(--border);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:.9rem}
+.hero-card{background:linear-gradient(180deg,var(--card),#0b1220);border:1px solid var(--border);border-radius:18px;padding:18px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-self:start}
+.stat{background:#0b1321;border:1px solid var(--border);border-radius:14px;padding:10px;text-align:center}
+.stat-number{display:block;font-size:1.3rem;font-weight:800;color:var(--accent)}
+.stat-label{font-size:.85rem;color:var(--muted)}
+
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.chip{border:1px solid var(--border);background:transparent;color:var(--text);padding:8px 10px;border-radius:999px;cursor:pointer}
+.chip.is-active{background:var(--primary);color:#001226}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px;transition:transform .2s ease}
+.card:hover{transform:translateY(-2px)}
+.card h3{margin:.2rem 0}
+.card p{color:var(--muted);line-height:1.6}
+.meta{list-style:none;padding:0;margin:0;display:flex;gap:14px;color:var(--muted);font-size:.9rem;flex-wrap:wrap}
+.tags{display:flex;gap:8px;flex-wrap:wrap}
+.tag{border:1px dashed var(--border);border-radius:999px;padding:4px 8px;font-size:.8rem;color:var(--muted)}
+
+.timeline{border-left:2px solid var(--border);margin-left:8px;padding-left:18px;display:grid;gap:12px}
+.timeline-item{position:relative}
+.timeline-dot{position:absolute;left:-26px;top:8px;width:10px;height:10px;border-radius:50%;background:var(--primary);box-shadow:0 0 0 3px #0b1017}
+.timeline-content h4{margin:.1rem 0}
+.timeline-content p{color:var(--muted);margin:.2rem 0 .4rem}
+
+.list{line-height:1.9;color:var(--muted)}
+.contact{display:flex;flex-wrap:wrap;gap:10px}
+
+.site-footer{padding:30px 0;color:var(--muted);text-align:center;border-top:1px solid var(--border);margin-top:28px}
+
+/* Modal */
+.modal{position:fixed;inset:0;display:none}
+.modal[aria-hidden="false"]{display:block}
+.modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px)}
+.modal-card{position:relative;max-width:720px;margin:8vh auto;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+.modal-close{position:absolute;top:10px;right:10px;border:1px solid var(--border);background:transparent;color:var(--text);border-radius:10px;padding:6px 8px;cursor:pointer}
+
+.reveal{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
+.reveal.is-visible{opacity:1;transform:none}
+
+/* Responsive */
+@media (max-width: 900px){
+  .hero{grid-template-columns:1fr}
+  .grid{grid-template-columns:1fr}
+  .hero-card{grid-template-columns:repeat(3,1fr)}
+}
+""").strip()
+
+SCRIPT_JS = dedent(f"""
+const yearEl = document.getElementById('year');
+if (yearEl) yearEl.textContent = new Date().getFullYear();
+const updatedEl = document.getElementById('updated');
+if (updatedEl) updatedEl.textContent = new Date().toLocaleDateString();
+
+// Dark mode toggle
+const toggle = document.querySelector('.theme-toggle');
+const root = document.documentElement;
+const THEME_KEY = 'theme';
+function setTheme(mode){{
+  if(mode === 'light'){{
+    root.style.setProperty('--bg', '#f7f9fc');
+    root.style.setProperty('--text', '#0a0f18');
+    root.style.setProperty('--muted', '#4b5975');
+    root.style.setProperty('--primary', '#0ea5e9');
+    root.style.setProperty('--accent', '#16a34a');
+    root.style.setProperty('--card', '#ffffff');
+    root.style.setProperty('--border', '#e6eaf3');
+  }}else{{
+    root.style.removeProperty('--bg');
+    root.style.removeProperty('--text');
+    root.style.removeProperty('--muted');
+    root.style.removeProperty('--primary');
+    root.style.removeProperty('--accent');
+    root.style.removeProperty('--card');
+    root.style.removeProperty('--border');
+  }}
+  localStorage.setItem(THEME_KEY, mode);
+}}
+if(toggle){{
+  toggle.addEventListener('click', ()=>{{
+    const current = localStorage.getItem(THEME_KEY) || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  }});
+}}
+const saved = localStorage.getItem(THEME_KEY);
+if(saved) setTheme(saved);
+
+// IntersectionObserver for reveal-on-scroll
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('is-visible'); observer.unobserve(e.target); }
+  });
+},{threshold:0.15});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Copy email
+const copyBtn = document.getElementById('copyEmail');
+if(copyBtn){
+  copyBtn.addEventListener('click', ()=>{
+    const email = '{CONTACT_EMAIL}';
+    navigator.clipboard.writeText(email).then(()=>{
+      copyBtn.textContent = 'Copied ✅';
+      setTimeout(()=> copyBtn.textContent='Copy Email', 1500);
+    });
+  });
+}
+
+// Load projects from JSON and render
+const grid = document.getElementById('projectGrid');
+let allProjects = [];
+fetch('projects.json').then(r=>r.json()).then(data=>{
+  allProjects = data.projects || [];
+  renderProjects(allProjects);
+  const countEl = document.getElementById('projCount');
+  if(countEl) countEl.textContent = allProjects.length;
+});
+
+function renderProjects(items){
+  if(!grid) return;
+  grid.innerHTML = items.map(cardHTML).join('');
+  document.querySelectorAll('.card[data-id]').forEach(card=>{
+    card.addEventListener('click', ()=> openModal(card.dataset.id));
+  });
+}
+function cardHTML(p){
+  const tags = (p.tags||[]).map(t=>`<span class="tag">${{t}}</span>`).join('');
+  return `
+    <article class="card" data-id="${{p.id}}">
+      <h3>${{p.title}}</h3>
+      <p>${{p.summary}}</p>
+      <div class="tags">${{tags}}</div>
+    </article>
+  `;
+}
+
+// Filters
+document.querySelectorAll('.chip').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.chip').forEach(b=>b.classList.remove('is-active'));
+    btn.classList.add('is-active');
+    const f = btn.dataset.filter;
+    if(f==='all') renderProjects(allProjects);
+    else renderProjects(allProjects.filter(p=> (p.tags||[]).includes(f)));
+  });
+});
+
+// Modal logic
+const modal = document.getElementById('modal');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalMeta = document.getElementById('modalMeta');
+const modalLinks = document.getElementById('modalLinks');
+
+document.querySelectorAll('[data-close]').forEach(x=> x.addEventListener('click', closeModal));
+function openModal(id){
+  const p = allProjects.find(x=> String(x.id)===String(id));
+  if(!p) return;
+  modalTitle.textContent = p.title;
+  modalDesc.textContent = p.description || p.summary || '';
+  modalMeta.innerHTML = [
+    p.stack ? `<li>Stack: ${{p.stack}}</li>`:'' ,
+    p.focus ? `<li>Focus: ${{p.focus}}</li>`:''
+  ].join('');
+  modalLinks.innerHTML = `
+    ${{p.links?.notes ? `<a class="btn btn-small" href="${{p.links.notes}}" target="_blank" rel="noreferrer">Notes</a>`:''}}
+    ${{p.links?.repo ? `<a class="btn btn-small btn-ghost" href="${{p.links.repo}}" target="_blank" rel="noreferrer">GitHub</a>`:''}}
+    ${{p.links?.demo ? `<a class="btn btn-small btn-ghost" href="${{p.links.demo}}" target="_blank" rel="noreferrer">Demo</a>`:''}}
+  `;
+  modal.setAttribute('aria-hidden','false');
+}
+function closeModal(){ modal.setAttribute('aria-hidden','true'); }
+document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeModal(); });
+""").strip()
+
+# Tailored projects based on known work and studies
+PROJECTS = {
+  "projects": [
+    {
+      "id": 1,
+      "title": "Windows VPN: Internet Drops on Connect (Split Tunneling Fix)",
+      "summary": "Diagnosed DNS/routing issue where internet died on VPN; enabled split tunneling and restored connectivity.",
+      "description": "User could ping 8.8.8.8 but had no web access when VPN connected. Identified 'Use default gateway on remote network' forcing all traffic through tunnel. Adjusted IPv4 advanced settings to enable split tunneling; validated DNS behavior and restored normal browsing with VPN active.",
+      "stack": "Windows 10/11, VPN client",
+      "focus": "Network defense",
+      "tags": ["Blue Team", "Networking"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 2,
+      "title": "MikroTik Static IP & VLAN Segmentation (Multiple Clients)",
+      "summary": "Configured static WAN, VLANs, and firewall rules via WinBox; verified link lights and DHCP scopes.",
+      "description": "Deployed MikroTik with static IP assignments, created VLANs for staff/guest/IoT, and implemented inter-VLAN ACLs. Verified DHCP, gateway reachability, and PoE switch connectivity. Documented config steps and change controls.",
+      "stack": "MikroTik (WinBox), UniFi",
+      "focus": "Networking",
+      "tags": ["Networking"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 3,
+      "title": "Fiber Termination & Camera Uplink Repair (RCM Elevator Room)",
+      "summary": "Terminated SC connectors, tested transceivers, and restored camera uplink after no-link condition.",
+      "description": "Completed SC terminations on multimode runs and installed a jumper box. Initial test showed no active fiber link. Swapped SFP transceiver, re-terminated as needed, restored uplink; camera network recovered.",
+      "stack": "Fiber (SC, MM), PoE switching",
+      "focus": "Physical/network infrastructure",
+      "tags": ["Networking"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 4,
+      "title": "WD MyCloud EX2 Ultra: Discovery & IP/Access Troubleshooting",
+      "summary": "Brought NAS back online, validated health, and corrected addressing (static/DHCP) for accessibility.",
+      "description": "NAS temporarily missing from network; used IP scan and WD tools to discover device, verified drive health (~100%) and age, and corrected IP settings (static/DHCP) for stable access. Documented admin steps and verification.",
+      "stack": "WD MyCloud EX2 Ultra, Windows tools",
+      "focus": "Storage/NAS",
+      "tags": ["Networking", "Blue Team"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 5,
+      "title": "Windows Imaging & SSD Migrations (Performance Remediation)",
+      "summary": "Reimaged slow systems, migrated HDD→SSD, tuned startup, and validated BIOS/UEFI and TRIM.",
+      "description": "Standardized process for slow endpoints: assessed disk health, cloned or clean-installed Windows 10/11 to SSDs (e.g., Samsung/WD), ensured UEFI, enabled TRIM, removed bloat, and documented time-to-boot improvements.",
+      "stack": "Windows 10/11, BIOS/UEFI",
+      "focus": "Endpoint hardening",
+      "tags": ["Automation", "Blue Team"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 6,
+      "title": "Python: Windows Event Log Parser (4624/4625 Triage)",
+      "summary": "Parses Security.evtx for auth events, aggregates by IP/user, outputs CSV for quick review.",
+      "description": "Automation for repetitive triage: extracts failed login attempts (4625) and logons (4624), summarizes top offending IPs/users, and provides counts for SOC-style decision-making.",
+      "stack": "Python",
+      "focus": "Automation",
+      "tags": ["Automation", "Blue Team"],
+      "links": {"notes": "#", "repo": "#", "demo": ""}
+    },
+    {
+      "id": 7,
+      "title": "Dropbox Cleanup with Backup Safeguard",
+      "summary": "Freed local disk space by removing synced Dropbox data after verified backup and stakeholder check.",
+      "description": "User didn’t actively use Dropbox but team did. Backed up critical files to on-site storage, removed local Dropbox data to reclaim space, and set a hold period so any missing-file concerns could be raised before deleting from NAS.",
+      "stack": "Windows 10/11, Dropbox",
+      "focus": "Data hygiene",
+      "tags": ["Docs", "Blue Team"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 8,
+      "title": "Ricoh MP C3503 (macOS) User Code Guide",
+      "summary": "Created a step-by-step guide for enabling user codes on macOS print dialogs.",
+      "description": "Wrote and shared a tutorial for macOS users: Layout → Printer Options → Job Log → Enable User Code. Reduced ticket volume by documenting a repeatable process.",
+      "stack": "macOS, Ricoh MP C3503",
+      "focus": "Documentation",
+      "tags": ["Docs", "Automation"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 9,
+      "title": "TrueNAS SCALE Homelab + Jellyfin (VM layout planning)",
+      "summary": "Explored TrueNAS on VM vs bare metal; separated services (NAS vs media) across VMs.",
+      "description": "Built a small homelab with TrueNAS SCALE for storage and Jellyfin for media on a separate VM. Documented pros/cons of virtualization, resource isolation, and network segmentation.",
+      "stack": "TrueNAS SCALE, Jellyfin, Virtualization",
+      "focus": "Homelab design",
+      "tags": ["Networking", "Blue Team"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    },
+    {
+      "id": 10,
+      "title": "Harwell HV2: Hyper-V Replication Health & Cleanup",
+      "summary": "Investigated critical replication state; freed space by retiring unused VM data.",
+      "description": "Replication health was critical with paused state. Found volume full; identified old VM artifacts no longer in use and coordinated safe removal to restore health and free capacity.",
+      "stack": "Windows Server, Hyper-V",
+      "focus": "Server ops",
+      "tags": ["Blue Team", "Networking"],
+      "links": {"notes": "#", "repo": "", "demo": ""}
+    }
+  ]
+}
+
+def write_file(path, content):
+  os.makedirs(os.path.dirname(path), exist_ok=True)
+  with open(path, "w", encoding="utf-8") as f:
+    f.write(content)
+
+def main():
+  out_dir = "./site"
+  write_file(os.path.join(out_dir, "index.html"), INDEX_HTML())
+  write_file(os.path.join(out_dir, "style.css"), STYLE_CSS)
+  write_file(os.path.join(out_dir, "script.js"), SCRIPT_JS)
+  write_file(os.path.join(out_dir, "projects.json"), json.dumps(PROJECTS, indent=2))
+
+  # Zip it
+  zip_path = "portfolio_site.zip"
+  with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as z:
+    for fname in ["index.html","style.css","script.js","projects.json"]:
+      z.write(os.path.join(out_dir, fname), arcname=fname)
+  print(f"Created {zip_path} with personalized portfolio files.")
+
+if __name__ == "__main__":
+  main()
