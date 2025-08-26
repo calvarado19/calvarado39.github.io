@@ -1,19 +1,9 @@
-# generate_portfolio.py
-# Creates a complete, personalized cybersecurity portfolio (HTML/CSS/JS + projects.json)
-# prefilled with Carlos Alvarado's background. Produces ./portfolio_site.zip.
-# Run: python generate_portfolio.py
-
-import os, json, zipfile
-from textwrap import dedent
-
 NAME = "Carlos Alvarado"
 ROLE = "IT Engineer · Cybersecurity Student"
 LOCATION = "San Antonio, TX"
 LINKEDIN_URL = "https://www.linkedin.com/in/carlos-alvarado-370b39275/"
 CONTACT_EMAIL = "20car06@gmail.com"
 SITE_URL = "https://calvarado39.github.io/"
-
-# ====== File contents ======
 
 INDEX_HTML = lambda: dedent(f"""
 <!DOCTYPE html>
@@ -59,7 +49,7 @@ INDEX_HTML = lambda: dedent(f"""
   <section class="hero container reveal">
     <div class="hero-text">
       <h1>{ROLE}</h1>
-      <p>Hi, I’m <strong>{NAME}</strong> — an IT engineer in {LOCATION} transitioning into cybersecurity. I work on MikroTik/UniFi networks, Windows servers, NAS, fiber runs, and blue-team labs. I’m building toward SOC Analyst / Security Engineer roles.</p>
+      <p>Hi, I’m <strong>{Carlos ALvarado}</strong> — an IT engineer in {San Antonio} transitioning into cybersecurity. I work on MikroTik/UniFi networks, Windows servers, NAS, fiber runs, and blue-team labs. I’m building toward SOC Analyst / Security Engineer roles.</p>
       <div class="hero-actions">
         <a href="#projects" class="btn">Explore Projects</a>
         <a href="{LINKEDIN_URL}" class="btn btn-ghost" target="_blank" rel="noreferrer">LinkedIn</a>
@@ -155,6 +145,8 @@ INDEX_HTML = lambda: dedent(f"""
   <script src="script.js"></script>
 </body>
 </html>
+
+
 """).strip()
 
 STYLE_CSS = dedent("""
